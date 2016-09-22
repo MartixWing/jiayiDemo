@@ -5,7 +5,7 @@ a [Sails](http://sailsjs.org) application
 项目说明
 
  项目准备
-  1.下载[nodejs4.4.4] (https://nodejs.org/dist/v4.4.4/)默认选项安装即可
+  1.下载[nodejs4.4.4](https://nodejs.org/dist/v4.4.4/) 默认选项安装即可
   2.安装sails 打开命令栏cmd 输入 npm -g install sails
   3.clone项目到本地 如 d:\demo 。并进入项目目录 cd d:\demo
   4.加载项目依赖项 cmd执行命令 npm install
