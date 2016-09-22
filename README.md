@@ -22,6 +22,6 @@ a [Sails](http://sailsjs.org) application
  项目开发
 
   静态资源放到文件夹 assets 下。[说明请看](http://sailsjs.org/documentation/concepts/assets)
-  
+
 
 更多的说明还在更新中。
