@@ -40,7 +40,7 @@ module.exports.routes = {
   //}
 
 
-  "get /lookUpServant": {controller: "ServantController", action: "query"}
+  "post /lookUpCert": {controller: "ServantController", action: "queryTest"}
 
   /***************************************************************************
   *                                                                          *
