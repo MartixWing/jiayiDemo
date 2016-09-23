@@ -1,0 +1,7 @@
+.userText {
+	/*控制文本框的边框是红色的实线*/
+	border: 1px solid red;
+	background-image: url(../../images/userVerify.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}

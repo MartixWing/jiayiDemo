@@ -32,9 +32,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  ////'/': {
+  ////  view: 'homepage'
+  ////},
+  //'/index': {
+  //  assets: 'index.html'
+  //}
+
+
+  "get /lookUpServant": {controller: "ServantController", action: "query"}
 
   /***************************************************************************
   *                                                                          *
