@@ -23,6 +23,21 @@ a [Sails](http://sailsjs.org) application
 
   静态资源放到文件夹 assets 下。[说明请看](http://sailsjs.org/documentation/concepts/assets)
 
+  前端项目的目录组织如下
+
+   images   图片文件夹
+
+   js       存放js文件：1公用js存放在此文件夹根目录，2业务相关的js文件新建相应的文件夹来存放
+
+   plugins:    存放插件
+
+   styles/less  存放less文件：1公用less存放在此文件夹根目录，2业务相关的less文件新建相应的文件夹来存放
+
+   styles/css   存放less文件：1公用css存放在此文件夹根目录，2业务相关的css文件新建相应的文件夹来存放
+
+   tempates     放html页面，业务相关的html文件新建相应的文件夹来存放
+
+   index.html   网站入口
 
 更多的说明还在更新中。
 
