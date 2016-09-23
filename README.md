@@ -39,5 +39,6 @@ a [Sails](http://sailsjs.org) application
 
    index.html   网站入口
 
-更多的说明还在更新中。
+
+9更多的说明还在更新中。
 
