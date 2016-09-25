@@ -1,14 +1,109 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>查询服务人员证书</title>
+        <link rel="stylesheet" href="styles/weui.min.css"/>
+        <link rel="stylesheet" href="styles/main.css"/>
+    </head>
+    <body ontouchstart>
+    <div class="container" id="container"></div>
+        <script type="text/html" id="tabbar">
+			<div class="weui_tab">
+			    <div class="weui_tab_bd">
+
+			    </div>
+			    <div class="weui_tabbar">
+			        <a href="#about" class="weui_tabbar_item weui_bar_item_on">
+			            <div class="weui_tabbar_icon">
+			                <img src="images/icon_nav_dialog.png" alt="">
+			            </div>
+			            <p class="weui_tabbar_label">关于我们</p>
+			        </a>
+			        <a href="#train" class="weui_tabbar_item">
+			            <div class="weui_tabbar_icon">
+			                <img src="images/icon_nav_article.png" alt="">
+			            </div>
+			            <p class="weui_tabbar_label">培训</p>
+			        </a>
+			        <a href="#certificate" class="weui_tabbar_item">
+			            <div class="weui_tabbar_icon">
+			                <img src="images/icon_nav_search_bar.png" alt="">
+			            </div>
+			            <p class="weui_tabbar_label">证书查询</p>
+			        </a>
+			    </div>
+			</div>
+		</script>
+		<script type="text/html" id="about">
+		<p>1</p>
+		</script>
+		<script type="text/html" id="train">
+		<p>2</p>
+		</script>
+		<script type="text/html" id="certificate">
+		<p>3</p>
+		</script>
+				
+    <script src="js/zepto.min.js"></script>
+    <script src="js/router.min.js"></script>
+    <script src="js/main.js"></script>
+	
+    </body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="zh-cmn-Hans">
 <head>
-  <title>查询家族服务人员</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link type="text/css" rel="stylesheet" href="styles/css/lookUpServant.css" />
-  <script type="text/javascript" src="js/jquery/jquery-3.1.0.min.js"></script>
-  <script type="text/javascript" src="js/lookUpServant/query.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="styles/weui.min.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
 </head>
-<body>
-请输入服务员名:<input type="text" id="userName" class="userText"/> <input type="button" value="校验" id="verifyButton" />
-<div id="result"></div>
+<body ontouchstart>
+    <div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+    <div class="container" id="container"></div>
+
+    <script type="text/html" id="tpl_tabbar">
+		<div class="page">
+		    <div class="page__bd" style="height: 100%;">
+		        <div class="weui-tab">
+		            <div class="weui-tab__panel">
+
+		            </div>
+		            <div class="weui-tabbar">
+		                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on js_item" data-id="tt" href="javascript:;">
+		                    <img src="images/icon_nav_dialog.png" alt="" class="weui-tabbar__icon">
+		                    <p class="weui-tabbar__label">关于我们</p>
+		                </a>
+		                <a href="javascript:;" class="weui-tabbar__item js_item">
+		                    <img src="images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
+		                    <p class="weui-tabbar__label">培训</p>
+		                </a>
+		                <a href="javascript:;" class="weui-tabbar__item">
+		                    <img src="images/icon_nav_search_bar.png" alt="" class="weui-tabbar__icon">
+		                    <p class="weui-tabbar__label">证书查询</p>
+		                </a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</script>
+	<script type="text/html" id="tpl_tt">
+		<div class="page">
+		    <div class="page__bd" style="height: 100%;">
+		        <div class="weui-tab">
+		            111
+		        </div>
+		    </div>
+		</div>
+	</script>
+    <script src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

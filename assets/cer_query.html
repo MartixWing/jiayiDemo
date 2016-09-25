@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>证书查询</title>
+    <link rel="stylesheet" href="styles/weui.min.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <style type="text/css">
+    	.page{opacity: 1;}
+    	.sure_query{margin-top: 20px;width: 80%}
+    	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
+    </style>
+</head>
+<body ontouchstart>
+	<div class="page">
+	    <div class="page__hd">
+	        <h1 class="page__title">证书查询</h1>
+	        <p class="page__desc">专业/权威信息提供</p>
+	    </div>
+	    <div class="page__bd">
+	        <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+	        <div class="weui-search-bar" id="search_bar">
+	            <form class="weui-search-bar__form">
+	                <div class="weui-search-bar__box">
+	                    <i class="weui-icon-search"></i>
+	                    <input type="search" class="weui-search-bar__input" id="search_input" placeholder="搜索" required/>
+	                    <a href="javascript:" class="weui-icon-clear" id="search_clear"></a>
+	                </div>
+	                <label for="search_input" class="weui-search-bar__label" id="search_text">
+	                    <i class="weui-icon-search"></i>
+	                    <span>搜索</span>
+	                </label>
+	            </form>
+	            <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a>
+	        </div>
+	    </div>
+	    <a href="javascript:;" class="weui-btn weui-btn_primary sure_query">确定查询</a>
+	    <div class="result_ss">
+	        <div class="weui-loadmore weui-loadmore_line">
+	            <span class="weui-loadmore__tips">暂无数据</span>
+	        </div>
+	        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+	            <span class="weui-loadmore__tips"></span>
+	        </div>
+		</div>
+		<div class="result_ss">
+	        
+		</div>
+		<div class="weui-footer">
+            <p class="weui-footer__links">
+                <a href="javascript:void(0);" class="weui-footer__link">矩阵之翼</a>
+            </p>
+            <p class="weui-footer__text">Copyright &copy; 2016</p>
+        </div>
+	</div>
+	
+    <script src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+    	$('#search_input').focus(function(){
+            //searchBar
+            var $weuiSearchBar = $('#search_bar');
+            $weuiSearchBar.addClass('weui-search-bar_focusing');
+        })
+    	$('#search_input').blur(function(){
+            var $weuiSearchBar = $('#search_bar');
+                $weuiSearchBar.removeClass('weui-search-bar_focusing');
+                if($(this).val()){
+                    $('#search_text').hide();
+                }else{
+                    $('#search_text').show();
+                }
+        })
+        $('#search_input').on('search', function(e){
+		  	var queryInfo = $('#search_input').val();
+		  	queryAjax(queryInfo)
+		});
+		$('.sure_query').on('click', function(e){
+		  	var queryInfo = $('#search_input').val();
+		  	queryAjax(queryInfo)
+		});
+        function queryAjax(queryInfo){
+        	if (queryInfo=='') {
+        		return;
+        	};
+        	$.ajax({
+			    type: 'post',
+			    url: '/lookUpCert',
+			    data: {'queryInfo':queryInfo},
+			    dataType: 'json',
+			    success: function(data) {
+			        console.log(data);
+			        alert(data.date[0].assessment)
+			    },
+			    error: function(data) {
+			        alert(data);
+			    }
+			});
+        }
+    </script>
+</body>
+</html>
