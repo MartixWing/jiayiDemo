@@ -35,13 +35,17 @@ module.exports.routes = {
   ////'/': {
   ////  view: 'homepage'
   ////},
-  //'/index': {
-  //  assets: 'index.html'
-  //}
 
 
-  "post /lookUpCert": {controller: "ServantController", action: "queryTest"}
+  ////根据条件模糊查询 返回一个列表
+  //"post /getCertList": {controller: "ServantController", action: "getCertList"},
+  ////根据证书id查找证书详细
+  //"post /getCertById": {controller: "ServantController", action: "getCertById"},
 
+  //根据条件模糊查询 返回一个列表
+  "post /getCertList": {controller: "ServantController", action: "queryListTest"},
+  //根据证书id查找证书详细
+  "post /getCertById": {controller: "ServantController", action: "queryTest"},
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
