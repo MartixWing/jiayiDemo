@@ -38,6 +38,9 @@ module.exports = {
     return res.send(testJson);
   },
 
+  /*
+   *测试用的假数据
+   */
   queryListTest: function (req, res) {
     var options = {
       queryInfo: req.param('queryInfo', ''),
@@ -74,17 +77,37 @@ module.exports = {
     return res.send(testJson);
   },
 
+
   /**
-   * 模糊查询
+   * 模糊查询服务员证书
+   * @param   {req}   request
+   * @param   {res}  response
    */
-  //getCertList: function (req, res) {
-  //  var options = {
-  //    queryInfo: req.param('queryInfo', ''),
-  //  };
-  //
-  //  ServantCert.getCertList(options,function(){
-  //
-  //  });
-  //}
+  getCertList: function (req, res) {
+    var options = {
+      queryInfo: req.param('queryInfo', ''),
+    };
+    //查询证书
+    ServantCert.getCertList(options,function(err,result){
+      if (err) return res.send(404,'对不起没有找到您要的信息');
+      res.send(result);
+    });
+  },
+
+  /**
+   * 查询服务员详细信息
+   * @param   {req}   request
+   * @param   {res}  response
+   */
+  getCertInfo: function (req, res) {
+    var options = {
+      queryInfo: req.param('queryInfo', ''),
+    };
+    //查询证书
+    ServantCert.getCertList(options,function(err,result){
+      if (err) return res.send(404,'对不起没有找到您要的信息');
+      res.send(result);
+    });
+  }
 };
 
