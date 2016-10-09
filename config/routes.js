@@ -38,7 +38,7 @@ module.exports.routes = {
 
 
   //查找证书信息（假数据）
-  "post /getCert": {controller: "ServantController", action: "queryTest"},
+  "post /getCert": {controller: "ServantController", action: "getCertInfo"},
 
 
   "/test": {controller: "ServantController", action: "getCertInfo"},

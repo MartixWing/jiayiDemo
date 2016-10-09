@@ -69,66 +69,13 @@ module.exports = {
     return combinedInfo;
   },
 
-
   /**
-   * 根据身份证号查找证书信息
+   * 根据条件找到证书信息
    * @param   {options}  查询参数
    * @param   {cb}  回调函数
    */
-  getCertByCard: function (options, cb) {
-
-    var queryObj ={IDCard:options.queryInfo };
-
-    sails.log.debug(queryObj);
-
-    Servant.findCertByCard(queryObj,function(err,result){
-
-      if (err) return cb(err);
-      //拼接返回参数
-
-      //callback
-      cb(null,date)
-    })
-
-  },
-
-  /**
-   * 根据证书号查找证书信息
-   * @param   {options}  查询参数
-   * @param   {cb}  回调函数
-   */
-  getCertByID: function (options, cb) {
-    var queryInfo = options.queryInfo;
-
-    if (queryInfo == null) return cb('参数不正确');
-
-    var queryObj ={idCard:queryInfo };
-
-    sails.log.debug(queryObj);
-
-    Servant.findCert(queryObj,function(err,result){
-      sails.log.debug(result);
-      if (err) return cb(err);
-      //拼接返回参数
-
-      //callback
-      cb(null,result)
-    })
-
-  },
-
-  /**
-   * 根据姓名查找证书信息
-   * @param   {options}  查询参数
-   * @param   {cb}  回调函数
-   */
-  getCertByName: function (options, cb) {
-
-    var queryObj ={userName:options.queryInfo };
-
-    sails.log.debug(queryObj);
-
-    Servant.findCertByName(queryObj,function(err,result){
+  getCert: function (options, cb) {
+    Servant.findCert(options,function(err,result){
       sails.log.debug(result);
       if (err) return cb(err);
       //拼接返回参数
@@ -136,9 +83,6 @@ module.exports = {
       //callback
       cb(null,combineObj)
     })
-
   },
-
-
 
 }

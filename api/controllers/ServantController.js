@@ -87,46 +87,34 @@ module.exports = {
    * @param   {res}  response
    */
   getCertInfo: function (req, res) {
-    var options = {
-      queryInfo: req.param('queryInfo', '519231231231543532'),
-    };
-
-    //var value = '12315534533212x';
-
+    var queryInfo =  req.param('queryInfo','测试');
+    var options = new Object();
+    sails.log.debug(queryInfo);
     var Regx = /^[A-Za-z0-9]*$/;
-    if (Regx.test(options.queryInfo)) {
-      if(options.queryInfo.length==18 || options.queryInfo.length==15){
+    if (Regx.test(queryInfo)) {
+      if(queryInfo.length==18 || queryInfo.length==15){
         //用户输入的是身份证，根据身份证查询
-        sails.log.info('111');
-        ServantCert.getCertByCard(options,function(err,result){
-          if (err) return res.send(404,'对不起没有找到您要的信息');
-          res.send(result);
-        });
+        sails.log.info('用户输入的是身份证');
+        options.IDCard = queryInfo;
+
       }else{
         //用户输入的是证件编号
-        ServantCert.getCertByID(options,function(err,result){
-          if (err) return res.send(404,'对不起没有找到您要的信息');
-          res.send(result);
-        });
-        sails.log.info('222');
+        sails.log.info('用户输入的是证件编号');
+        options.certificateID = queryInfo;
       }
-
     }
     else {
       //用户输入的是名字
-      ServantCert.getCertByName(options,function(err,result){
-        if (err) return res.send(404,'对不起没有找到您要的信息');
-        res.send(result);
-      });
-      sails.log.info('333');
+      options.userName = queryInfo;
     }
 
     //查询证书
-    //ServantCert.getCertList(options,function(err,result){
-    //  if (err) return res.send(404,'对不起没有找到您要的信息');
-    //  res.send(result);
-    //});
-
+    ServantCert.getCert(options,function(err,result){
+      if (err) return res.send(404,'对不起没有找到您要的信息');
+      var str = JSON.stringify(result) ;
+      result = require('util').format('{"msgNo":"0000","msgInfo":"查询到了信息","data":%s}',str);
+      res.send(result);
+    });
   }
 };
 
