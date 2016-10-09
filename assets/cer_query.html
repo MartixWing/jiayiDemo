@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>证书查询</title>
-    <link rel="stylesheet" href="styles/weui.min.css"/>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.0/weui.min.css"/>
     <link rel="stylesheet" href="styles/main.css"/>
     <style type="text/css">
-    	.page{opacity: 1;}
+    	.page{opacity: 1;font-family: '微软雅黑'}
     	.sure_query{margin-top: 20px;width: 80%}
     	.result_ss{margin-top: 10px}
     	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
@@ -36,7 +36,7 @@
 	            <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a>
 	        </div>
 	    </div>
-	    <a href="javascript:;" class="weui-btn weui-btn_primary sure_query">确定查询</a>
+	    <a href="javascript:;" class="weui-btn weui-btn_primary sure_query">查询</a>
 
 	    <div class="result_empty" style="display:none">
 	        <div class="weui-loadmore weui-loadmore_line">
@@ -96,7 +96,7 @@
 			        	var listHtml=[];
 			        	$('.result_ss').empty();
 			        	for(var i =0;i<data.date.length;i++){
-			        		listHtml.push('<a class="weui-cell weui-cell_access" href="javascript:;" data-id='+data.date[i].certificateID+'>')
+			        		listHtml.push('<a class="weui-cell weui-cell_access" href="cer_result.html" data-id='+data.date[i].certificateID+'>')
 				                listHtml.push('<div class="weui-cell__bd">')
 				                    listHtml.push('<p>'+data.date[i].userName+'-'+data.date[i].userGender+'-'+data.date[i].idCard+'</p>')
 				                listHtml.push('</div>')

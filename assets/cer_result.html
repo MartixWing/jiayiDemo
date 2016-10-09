@@ -4,43 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>证书查询</title>
-    <link rel="stylesheet" href="styles/weui.min.css"/>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.0/weui.min.css"/>
     <link rel="stylesheet" href="styles/main.css"/>
     <style type="text/css">
-    	.page{opacity: 1;}
+    	.page{opacity: 1;font-family: '微软雅黑'}
+    	.page__hd{padding: 15px;}
+    	.page__title{font-size: 16px}
     	.sure_query{margin-top: 20px;width: 80%}
     	.result_ss{margin-top: 10px}
-    	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
-    	.info_list{padding: 10px;border-bottom: 1px solid #d9d9d9;}
+    	.weui-footer {margin-top: 50px;position: relative;bottom: 10px}
+    	.info div{font-size: .8em;}
+    	.info_list{border-bottom: 1px solid #F2F2F2;line-height: 40px;}
+    	.weui-panel__hd{padding:10px 15px; }
+    	.eui-form-previeww{font-size: 0.8em}
+    	.pic{margin: 20px 0;}
+    	.certificatedImgUrl img{width:60px;}
+    	.item_right{flex:3;}
+    	.weui-panel__bd{padding:10px 15px 0 15px;}
+    	.page__bd{margin-top: 20px}
+    	.first_bd{margin-top: 0px}
     </style>
 </head>
 <body ontouchstart>
-	<div class="page">
+	<div class="page page1"  style="display:none">
 		<div class="page__hd">
 	        <h1 class="page__title">证书查询</h1>
 	        <p class="page__desc">专业/权威信息提供</p>
 	    </div>
-		<div class="info">
-			<div class="weui-form-preview">
-	            <div class="weui-flex info_list">
-		            <div class="weui-flex__item"><div class="">照片:</div></div>
-		            <div class="weui-flex__item"><div class="certificatedImgUrl"><img src="images/icon_nav_panel.png"></div></div>
-		        </div>
-		        <div class="weui-flex info_list">
-		            <div class="weui-flex__item"><div class="">照片</div></div>
-		            <div class="weui-flex__item"><div class="">qwe</div></div>
-		        </div>
-		        <div class="weui-flex info_list">
-		            <div class="weui-flex__item"><div class="">照片</div></div>
-		            <div class="weui-flex__item"><div class="">qwe</div></div>
-		        </div>
-		        <div class="weui-flex info_list">
-		            <div class="weui-flex__item"><div class="">照片</div></div>
-		            <div class="weui-flex__item"><div class="">qwe</div></div>
-		        </div>
-            </div>
-
-		</div>
+	    <!-- 加载中 -->
+	    <div id="loadingToast">
+	        <div class="weui-mask_transparent"></div>
+	        <div class="weui-toast">
+	            <i class="weui-loading weui-icon_toast"></i>
+	            <p class="weui-toast__content">查询中</p>
+	        </div>
+	    </div> 
+		
+		<div class="weui-footer">
+            <p class="weui-footer__links">
+                <a href="javascript:void(0);" class="weui-footer__link">矩阵之翼</a>
+            </p>
+            <p class="weui-footer__text">Copyright &copy; 2016</p>
+        </div>
+	</div>
+	<div class="page page2">
+		<div class="page__hd">
+	        <h1 class="page__title">证书查询</h1>
+	        <p class="page__desc">专业/权威信息提供</p>
+	    </div>
+     	<div class="page__bd first_bd">
+	        <div class="weui-panel weui-panel_access">
+	            <div class="weui-panel__hd">个人信息</div>
+	            <div class="weui-panel__bd">
+						<div class="eui-form-previeww">
+				            <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left pic"><p class="">照片：</p></div>
+					            <div class="weui-flex__item item_right"><div class="certificatedImgUrl"><img src="images/11.png"></div></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">身份证：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">证书编号：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
+					        </div>
+			            </div>
+	            </div>
+	        </div>
+	    </div>
+		<div class="page__bd">
+	        <div class="weui-panel weui-panel_access">
+	            <div class="weui-panel__hd">证书信息-19819</div>
+	            <div class="weui-panel__bd">
+						<div class="eui-form-previeww">
+				            <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">身份证：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">证书编号：</p></div>
+					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
+					        </div>
+			            </div>
+	            </div>
+	        </div>
+	    </div>
 		<div class="weui-footer">
             <p class="weui-footer__links">
                 <a href="javascript:void(0);" class="weui-footer__link">矩阵之翼</a>
@@ -52,59 +113,7 @@
     <script src="js/zepto.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
-    	$('#search_input').focus(function(){
-            //searchBar
-            var $weuiSearchBar = $('#search_bar');
-            $weuiSearchBar.addClass('weui-search-bar_focusing');
-        })
-    	$('#search_input').blur(function(){
-            var $weuiSearchBar = $('#search_bar');
-                $weuiSearchBar.removeClass('weui-search-bar_focusing');
-                if($(this).val()){
-                    $('#search_text').hide();
-                }else{
-                    $('#search_text').show();
-                }
-        })
-        $('#search_input').on('search', function(e){
-		  	var queryInfo = $('#search_input').val();
-		  	queryAjax(queryInfo)
-		});
-		$('.sure_query').on('click', function(e){
-		  	var queryInfo = $('#search_input').val();
-		  	queryAjax(queryInfo)
-		});
-        function queryAjax(queryInfo){
-        	if (queryInfo=='') {
-        		return;
-        	};
-        	$.ajax({
-			    type: 'post',
-			    url: '/getCertList',
-			    data: {'queryInfo':queryInfo},
-			    dataType: 'json',
-			    success: function(data) {
-			        if (data.date.length>0) {
-			        	var listHtml=[];
-			        	$('.result_ss').empty();
-			        	for(var i =0;i<data.date.length;i++){
-			        		listHtml.push('<a class="weui-cell weui-cell_access" href="javascript:;" data-id='+data.date[i].certificateID+'>')
-				                listHtml.push('<div class="weui-cell__bd">')
-				                    listHtml.push('<p>'+data.date[i].userName+'-'+data.date[i].userGender+'-'+data.date[i].idCard+'</p>')
-				                listHtml.push('</div>')
-				               listHtml.push(' <div class="weui-cell__ft"></div>')
-				            listHtml.push('</a>')
-			        	}
-			        	listHtml = listHtml.join('');
-			        	$('.result_ss').append(listHtml)
-			        }else{
-			        	$('.result_empty').show();
-			        };
-			    },
-			    error: function(data) {
-			    }
-			});
-        }
+
     </script>
 </body>
 </html>
