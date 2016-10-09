@@ -2,44 +2,102 @@
  * Created by whl on 2016/9/26.
  */
 
+
 var Servant= require("../models/Servant")
 
 module.exports = {
   /**
-   * 根据条件模糊查找证书信息，返回一个列表
+   * 合并相同的服务员
+   * @param   {result}  查询出的对象
+   *
+   */
+  combineSameServent:function (result){
+    var combinedInfo = [];
+    sails.log.debug("result length++++++++++++++++++++"+result.length);
+    for (var x in result ){
+      var sameServert = [];
+      var sameID = result[x].userID;
+      sails.log.debug(sameID);
+      for (var y = 0 ; y < result.length ; y++){
+        sails.log.debug("y_________________"+y);
+        if(result[y].userID == sameID){
+          sameServert.push(result[y]);
+          var removed = result.splice(y,1);
+          y=y-1;
+          sails.log.debug("y-1="+y);
+          //sails.log.debug("removed111111111111");
+          //sails.log.debug(removed);
+          sails.log.debug(result);
+        }
+      }
+      sails.log.debug("sameServert---------------");
+      sails.log.debug(sameServert);
+      var certInfo = [];
+      for (var i=0;i<sameServert.length;i++){
+        certInfo[i] = new Object();
+        certInfo[i].certificateID =  sameServert[i].certificateID;
+        certInfo[i].workTypeName =  sameServert[i].workTypeName;
+        certInfo[i].rank =  sameServert[i].rank;
+        certInfo[i].assessment =  sameServert[i].assessment;
+        certInfo[i].authorityDate =  sameServert[i].authorityDate;
+        certInfo[i].authorityUnit =  sameServert[i].authorityUnit;
+        certInfo[i].serialNumber =  sameServert[i].serialNumber;
+        certInfo[i].score1 =  sameServert[i].score1;
+        certInfo[i].score2 =  sameServert[i].score2;
+        certInfo[i].score3 =  sameServert[i].score3;
+        certInfo[i].score4 =  sameServert[i].score4;
+      }
+      sails.log.debug(certInfo);
+      var date = new Object();
+      var date = sameServert[0];
+      delete date.certificateID;
+      delete date.workTypeName;
+      delete date.rank;
+      delete date.assessment;
+      delete date.authorityDate;
+      delete date.authorityUnit;
+      delete date.serialNumber;
+      delete date.score1;
+      delete date.score2;
+      delete date.score3;
+      delete date.score4;
+      date.certInfo = certInfo ;
+      //sails.log.debug(date);
+      combinedInfo.push(date);
+    }
+    sails.log.debug(combinedInfo);
+    return combinedInfo;
+  },
+
+
+  /**
+   * 根据身份证号查找证书信息
    * @param   {options}  查询参数
    * @param   {cb}  回调函数
    */
+  getCertByCard: function (options, cb) {
 
-  getCertList: function (options, cb) {
-    var queryInfo = options.queryInfo;
-
-    if (queryInfo == null) return cb('参数不正确');
-
-    var queryObj ={or : [
-                  { userName:queryInfo },
-                  { certificateID:queryInfo },
-                  { idCard:queryInfo }]};
+    var queryObj ={IDCard:options.queryInfo };
 
     sails.log.debug(queryObj);
 
-    Servant.findCert(queryObj,function(err,result){
-      sails.log.debug(result);
+    Servant.findCertByCard(queryObj,function(err,result){
+
       if (err) return cb(err);
       //拼接返回参数
 
       //callback
-      cb(null,result)
-
+      cb(null,date)
     })
 
   },
+
   /**
-   * 根据身份证查询服务员详细的证书信息
+   * 根据证书号查找证书信息
    * @param   {options}  查询参数
    * @param   {cb}  回调函数
    */
-  getCertInfo: function (options, cb) {
+  getCertByID: function (options, cb) {
     var queryInfo = options.queryInfo;
 
     if (queryInfo == null) return cb('参数不正确');
@@ -57,5 +115,30 @@ module.exports = {
       cb(null,result)
     })
 
-  }
+  },
+
+  /**
+   * 根据姓名查找证书信息
+   * @param   {options}  查询参数
+   * @param   {cb}  回调函数
+   */
+  getCertByName: function (options, cb) {
+
+    var queryObj ={userName:options.queryInfo };
+
+    sails.log.debug(queryObj);
+
+    Servant.findCertByName(queryObj,function(err,result){
+      sails.log.debug(result);
+      if (err) return cb(err);
+      //拼接返回参数
+      var combineObj = ServantCert.combineSameServent(result);
+      //callback
+      cb(null,combineObj)
+    })
+
+  },
+
+
+
 }

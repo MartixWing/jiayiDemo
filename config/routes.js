@@ -37,15 +37,11 @@ module.exports.routes = {
   ////},
 
 
-  ////根据条件模糊查询 返回一个列表
-  //"post /getCertList": {controller: "ServantController", action: "getCertList"},
-  ////根据证书id查找证书详细
-  //"post /getCertById": {controller: "ServantController", action: "getCertById"},
+  //查找证书信息（假数据）
+  "post /getCert": {controller: "ServantController", action: "queryTest"},
 
-  //根据条件模糊查询 返回一个列表
-  "post /getCertList": {controller: "ServantController", action: "queryListTest"},
-  //根据证书id查找证书详细
-  "post /getCertById": {controller: "ServantController", action: "queryTest"},
+
+  "/test": {controller: "ServantController", action: "getCertInfo"},
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
