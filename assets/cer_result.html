@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>证书查询</title>
+    <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.0/weui.min.css"/>
     <link rel="stylesheet" href="styles/main.css"/>
     <style type="text/css">
@@ -14,19 +15,20 @@
     	.result_ss{margin-top: 10px}
     	.weui-footer {margin-top: 50px;position: relative;bottom: 10px}
     	.info div{font-size: .8em;}
-    	.info_list{border-bottom: 1px solid #F2F2F2;line-height: 40px;}
+    	.info_list{border-bottom: 1px solid #F2F2F2;line-height: 35px;}
     	.weui-panel__hd{padding:10px 15px; }
     	.eui-form-previeww{font-size: 0.8em}
-    	.pic{margin: 20px 0;}
-    	.certificatedImgUrl img{width:60px;}
-    	.item_right{flex:3;}
-    	.weui-panel__bd{padding:10px 15px 0 15px;}
+    	.pic{margin: 32px 0;}
+    	.avatarUrl img{width:70px;display: block;margin: 10px 0;border: 1px solid #F2F2F2;border-radius: 5px}
+    	.item_right{flex:1;}
+    	.item_left{text-align: right;}
+    	.weui-panel__bd{padding:0 15px}
     	.page__bd{margin-top: 20px}
     	.first_bd{margin-top: 0px}
     </style>
 </head>
 <body ontouchstart>
-	<div class="page page1"  style="display:none">
+	<div class="page page1">
 		<div class="page__hd">
 	        <h1 class="page__title">证书查询</h1>
 	        <p class="page__desc">专业/权威信息提供</p>
@@ -47,7 +49,7 @@
             <p class="weui-footer__text">Copyright &copy; 2016</p>
         </div>
 	</div>
-	<div class="page page2">
+	<div class="page page2" style="display:none">
 		<div class="page__hd">
 	        <h1 class="page__title">证书查询</h1>
 	        <p class="page__desc">专业/权威信息提供</p>
@@ -57,50 +59,29 @@
 	            <div class="weui-panel__hd">个人信息</div>
 	            <div class="weui-panel__bd">
 						<div class="eui-form-previeww">
-				            <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left pic"><p class="">照片：</p></div>
-					            <div class="weui-flex__item item_right"><div class="certificatedImgUrl"><img src="images/11.png"></div></div>
-					        </div>
+				            
 					        <div class="weui-flex info_list">
 					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
+					            <div class="weui-flex__item item_right"><p class="userName"></p></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left pic"><p class="">照片：</p></div>
+					            <div class="weui-flex__item item_right"><div class="avatarUrl"><img src="images/11.png"></div></div>
+					        </div>
+					        <div class="weui-flex info_list">
+					            <div class="weui-flex__item item_left"><p class="">性别：</p></div>
+					            <div class="weui-flex__item item_right"><p class="gender"></p></div>
 					        </div>
 					        <div class="weui-flex info_list">
 					            <div class="weui-flex__item item_left"><p class="">身份证：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
-					        </div>
-					        <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left"><p class="">证书编号：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
+					            <div class="weui-flex__item item_right"><p class="IDCard"></p></div>
 					        </div>
 			            </div>
 	            </div>
 	        </div>
 	    </div>
-		<div class="page__bd">
-	        <div class="weui-panel weui-panel_access">
-	            <div class="weui-panel__hd">证书信息-19819</div>
-	            <div class="weui-panel__bd">
-						<div class="eui-form-previeww">
-				            <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
-					        </div>
-					        <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe</p></div>
-					        </div>
-					        <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left"><p class="">身份证：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
-					        </div>
-					        <div class="weui-flex info_list">
-					            <div class="weui-flex__item item_left"><p class="">证书编号：</p></div>
-					            <div class="weui-flex__item item_right"><p class="">qwe111111111111111111</p></div>
-					        </div>
-			            </div>
-	            </div>
-	        </div>
+		<div class="page__bd certInfo_bd">
+	        
 	    </div>
 		<div class="weui-footer">
             <p class="weui-footer__links">
@@ -113,7 +94,97 @@
     <script src="js/zepto.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
+    	function getQueryString(name) {
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return unescape(r[2]);
+	        return null;
+	    }
+	    $(document).ready(function(){
+	    	var queryInfo=getQueryString('queryInfo');
+			$.ajax({
+			    type: 'post',
+			    url: '/getCert',
+			    data: {'queryInfo':queryInfo},
+			    dataType: 'json',
+			    success: function(data) {
+			    	if (data.data) {
+			        	var listHtml = [],
+			        	certInfo = data.data[0].certInfo;
+			        	$('.certInfo_bd').empty();
 
+			        	$('.avatarUrl img').attr('src',data.data[0].avatarUrl)
+			        	$('.userName').html(data.data[0].userName)
+			        	$('.gender').html(data.data[0].gender)
+			        	$('.IDCard').html(data.data[0].IDCard)
+
+			        	for(var i =0;i<certInfo.length;i++){
+			        		listHtml.push('<div class="weui-panel weui-panel_access">')
+				                listHtml.push('<div class="weui-panel__hd">证书信息-'+certInfo[i].certificateID+'</div>')
+			                    listHtml.push('<div class="weui-panel__bd">')
+			                    	listHtml.push('<div class="eui-form-previeww">')
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">证书编号：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].certificateID+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">职业（工种）：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].workTypeName+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">等级：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].rank+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">评定成绩：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].assessment+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">理论知识考试成绩：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].score1+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">操作技能考核成绩：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].score2+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证单位：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].authorityUnit+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证日期：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].authorityDate+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    		listHtml.push('<div class="weui-flex info_list">')
+			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证流水码及所属号段：</p></div>')
+			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].serialNumber+'</p></div>')
+			                    		listHtml.push('</div>')
+
+			                    	listHtml.push('</div>')
+		                		listHtml.push('</div>')
+				            listHtml.push('</div>')
+			        	}
+			        	listHtml = listHtml.join('');
+			        	$('.certInfo_bd').append(listHtml);
+
+			        	$('.page1').hide();
+			        	$('.page2').show();
+			        }else{
+			        	
+			        };
+			    },
+			    error: function(data) {
+			    }
+			});
+		});
     </script>
 </body>
 </html>

@@ -11,6 +11,22 @@
     	.sure_query{margin-top: 20px;width: 80%}
     	.result_ss{margin-top: 10px}
     	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
+    	.weui-cell__bd{font-size: 0.8em}
+    	.page2 .page__hd{padding: 15px;}
+    	.page__title{font-size: 16px}
+    	.sure_query{margin-top: 20px;width: 80%}
+    	.result_ss{margin-top: 10px}
+    	.weui-footer {margin-top: 50px;position: relative;bottom: 10px}
+    	.info div{font-size: .8em;}
+    	.info_list{border-bottom: 1px solid #F2F2F2;line-height: 40px;}
+    	.weui-panel__hd{padding:10px 15px; }
+    	.eui-form-previeww{font-size: 0.8em}
+    	.pic{margin: 20px 0;}
+    	.certificatedImgUrl img{width:60px;}
+    	.item_right{flex:3;}
+    	.weui-panel__bd{padding:10px 15px 0 15px;}
+    	.page__bd{margin-top: 20px}
+    	.first_bd{margin-top: 0px}
     </style>
 </head>
 <body ontouchstart>
@@ -56,7 +72,6 @@
             <p class="weui-footer__text">Copyright &copy; 2016</p>
         </div>
 	</div>
-	
     <script src="js/zepto.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
@@ -88,23 +103,25 @@
         	};
         	$.ajax({
 			    type: 'post',
-			    url: '/getCertList',
+			    url: '/getCert',
 			    data: {'queryInfo':queryInfo},
 			    dataType: 'json',
 			    success: function(data) {
-			        if (data.date.length>0) {
+			    	if (data.data.length>1) {
 			        	var listHtml=[];
 			        	$('.result_ss').empty();
-			        	for(var i =0;i<data.date.length;i++){
-			        		listHtml.push('<a class="weui-cell weui-cell_access" href="cer_result.html" data-id='+data.date[i].certificateID+'>')
+			        	for(var i =0;i<data.data.length;i++){
+			        		listHtml.push('<a class="weui-cell weui-cell_access" href="cer_result.html?queryInfo='+data.data[i].IDCard+'">')
 				                listHtml.push('<div class="weui-cell__bd">')
-				                    listHtml.push('<p>'+data.date[i].userName+'-'+data.date[i].userGender+'-'+data.date[i].idCard+'</p>')
+				                    listHtml.push('<p>'+data.data[i].userName+'-'+data.data[i].gender+'-'+data.data[i].IDCard+'</p>')
 				                listHtml.push('</div>')
 				               listHtml.push(' <div class="weui-cell__ft"></div>')
 				            listHtml.push('</a>')
 			        	}
 			        	listHtml = listHtml.join('');
 			        	$('.result_ss').append(listHtml)
+			        }else if (data.data.length=1) {
+			        	window.location.href='/cer_result.html?queryInfo='+data.data[0].IDCard;
 			        }else{
 			        	$('.result_empty').show();
 			        };
