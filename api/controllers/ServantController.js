@@ -56,7 +56,7 @@ module.exports = {
         },
         {
           "userName": "测试2",
-          "IDCard": "519231231231543532",
+          "IDCard": "519231231231543531",
           "gender": "女",
           "birthday": "2016-10-26",
           "avatarUrl": "http://image.vsuch.com/vsuch/200911/10/96/8379669535949834792.jpg",
@@ -88,7 +88,7 @@ module.exports = {
    */
   getCertInfo: function (req, res) {
     var options = {
-      queryInfo: req.param('queryInfo', '测试2'),
+      queryInfo: req.param('queryInfo', '519231231231543532'),
     };
 
     //var value = '12315534533212x';
