@@ -21,8 +21,8 @@
     	.info_list{border-bottom: 1px solid #F2F2F2;line-height: 35px;}
     	.weui-panel__hd{padding:10px 15px; }
     	.eui-form-previeww{font-size: 0.8em}
-    	.pic{margin: 32px 0;}
-    	.avatarUrl img{width:70px;display: block;margin: 10px 0;border: 1px solid #F2F2F2;border-radius: 5px}
+    	.pic p{margin-top: 30px;}
+    	.avatarUrl img{width:70px;display: block;margin: 14px 0;border: 1px solid #F2F2F2;border-radius: 5px}
     	.item_right{flex:1;}
     	.item_left{text-align: right;}
     </style>
@@ -112,15 +112,19 @@
 			        	var listHtml = [],
 			        	certInfo = data.data[0].certInfo;
 			        	$('.certInfo_bd').empty();
-
-			        	$('.avatarUrl img').attr('src',data.data[0].avatarUrl)
+			        	if (data.data[0].avatarUrl==null) {
+			        		$('.avatarUrl img').attr('src','images/timg.jpg')
+			        	}else{
+			        		$('.avatarUrl img').attr('src',data.data[0].avatarUrl)
+			        	};
+			        	
 			        	$('.userName').html(data.data[0].userName)
 			        	$('.gender').html(data.data[0].gender)
 			        	$('.IDCard').html(data.data[0].IDCard)
 
 			        	for(var i =0;i<certInfo.length;i++){
 			        		listHtml.push('<div class="weui-panel weui-panel_access">')
-				                listHtml.push('<div class="weui-panel__hd">证书信息-'+certInfo[i].certificateID+'</div>')
+				                listHtml.push('<div class="weui-panel__hd">'+certInfo[i].workTypeName+'证</div>')
 			                    listHtml.push('<div class="weui-panel__bd">')
 			                    	listHtml.push('<div class="eui-form-previeww">')
 			                    		listHtml.push('<div class="weui-flex info_list">')

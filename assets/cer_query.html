@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>证书查询</title>
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.0/weui.min.css"/>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.2/weui.min.css"/>
     <link rel="stylesheet" href="styles/main.css"/>
     <style type="text/css">
-    	.page{opacity: 1;font-family: '微软雅黑'}
     	.sure_query{margin-top: 20px;width: 80%}
     	.result_ss{margin-top: 10px}
     	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
@@ -16,7 +15,12 @@
     	.page__title{font-size: 16px}
     	.sure_query{margin-top: 20px;width: 80%}
     	.result_ss{margin-top: 10px}
-    	.weui-footer {margin-top: 50px;position: relative;bottom: 10px}
+    	.weui-footer {position: absolute;bottom: 10px}
+    	#ag_input{margin-top: -8px;display: none}
+    	#ag_input:before{border-top: none}
+    	#ag_input input{padding: 4px 10px;width: 100%;height: 1.42857143em;font-size: 14px;line-height: 1.42857143em;box-sizing: content-box;border: none;border-radius: 5px !important;}
+		.weui-loadmore_line .weui-loadmore__tips{background-color: #f8f8f8}
+
     </style>
 </head>
 <body ontouchstart>
@@ -31,16 +35,20 @@
 	            <form class="weui-search-bar__form" action="javascript:return true;">
 	                <div class="weui-search-bar__box">
 	                    <i class="weui-icon-search"></i>
-	                    <input type="search" class="weui-search-bar__input" id="search_input" placeholder="搜索" required/>
+	                    <input type="search" class="weui-search-bar__input" id="search_input" placeholder="请输入姓名/身份证号码/证书编号查询" required/>
 	                    <a href="javascript:" class="weui-icon-clear" id="search_clear"></a>
 	                </div>
 	                <label for="search_input" class="weui-search-bar__label" id="search_text">
 	                    <i class="weui-icon-search"></i>
-	                    <span>搜索</span>
+	                    <span>请输入姓名/身份证号码/证书编号查询</span>
 	                </label>
 	            </form>
 	            <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a>
 	        </div>
+	    </div>
+	    <div class="weui-search-bar" id="ag_input">
+	    	<input type="text" class="" id="idcard_input" placeholder="请输入身份证号码后4位" maxlength="4" />
+	    	<input type="hidden" value="" id="data_input">
 	    </div>
 	    <a href="javascript:;" class="weui-btn weui-btn_primary sure_query">查询</a>
 
@@ -55,6 +63,13 @@
 		<div class="result_ss">
 	        
 		</div>
+		<div id="loadingToast" style="display:none">
+	        <div class="weui-mask_transparent"></div>
+	        <div class="weui-toast">
+	            <i class="weui-loading weui-icon_toast"></i>
+	            <p class="weui-toast__content">查询中</p>
+	        </div>
+	    </div> 
 		<div class="weui-footer">
             <p class="weui-footer__links">
                 <a href="javascript:void(0);" class="weui-footer__link">矩阵之翼</a>
@@ -91,26 +106,45 @@
         	if (queryInfo=='') {
         		return;
         	};
+        	var new_queryInfo = queryInfo;
+        	$('#loadingToast').show();
+        	if ($('#data_input').val()!='') {
+        		if ($('#idcard_input').val()=='') {
+        			$('#loadingToast').hide();
+        			return;
+        		};
+        		var idcard_input = $('#idcard_input').val();
+        		var IDCard = $('#data_input').val().split(",")
+        		for(var i = 0;i<IDCard.length;i++){
+        			if (idcard_input == IDCard[i].substr(-4)) {
+        				queryInfo=IDCard[i];
+        			}
+        		}
+        		//alert($.inArray("idcard_input", IDCard) )
+        		if (new_queryInfo==queryInfo) {
+        			$('#loadingToast').hide();
+        			$('.result_empty').show();
+        			return;
+        		};
+        	}
         	$.ajax({
 			    type: 'post',
 			    url: '/getCert',
 			    data: {'queryInfo':queryInfo},
 			    dataType: 'json',
 			    success: function(data) {
+			    	$('#loadingToast').hide();
 			    	if (data.data.length>1) {
-			        	var listHtml=[];
-			        	$('.result_ss').empty();
+			        	var listidcard=[];
 			        	for(var i =0;i<data.data.length;i++){
-			        		listHtml.push('<a class="weui-cell weui-cell_access" href="cer_result.html?queryInfo='+data.data[i].IDCard+'">')
-				                listHtml.push('<div class="weui-cell__bd">')
-				                    listHtml.push('<p>'+data.data[i].userName+'-'+data.data[i].gender+'-'+data.data[i].IDCard+'</p>')
-				                listHtml.push('</div>')
-				               listHtml.push(' <div class="weui-cell__ft"></div>')
-				            listHtml.push('</a>')
+			        		listidcard.push(data.data[i].IDCard)     
 			        	}
-			        	listHtml = listHtml.join('');
-			        	$('.result_ss').append(listHtml);
-			        }else if (data.data.length=1) {
+			        	$('#data_input').val(listidcard)
+			        	$('#search_input').attr("disabled",true);
+			        	$('#ag_input').show();
+			        }else if (data.data.length==1) {
+			        	$('#data_input').val('');
+			        	$('#idcard_input').val('');
 			        	window.location.href='/cer_result.html?queryInfo='+data.data[0].IDCard;
 			        }else{
 			        	$('.result_empty').show();
