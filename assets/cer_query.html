@@ -43,7 +43,7 @@
 	                    <span>请输入姓名/身份证号码/证书编号查询</span>
 	                </label>
 	            </form>
-	            <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a>
+	            <!-- <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a> -->
 	        </div>
 	    </div>
 	    <div class="weui-search-bar" id="ag_input">
@@ -94,6 +94,10 @@
                     $('#search_text').show();
                 }
         })
+        $('#search_clear').on('click',function(){
+        	$("#search_show").hide();
+            $('#search_input').val('');
+        })
         $('#search_input').on('search', function(e){
 		  	var queryInfo = $('#search_input').val();
 		  	queryAjax(queryInfo)
@@ -103,6 +107,7 @@
 		  	queryAjax(queryInfo)
 		});
         function queryAjax(queryInfo){
+        	$('.result_empty').hide();
         	if (queryInfo=='') {
         		return;
         	};
@@ -147,6 +152,7 @@
 			        	$('#idcard_input').val('');
 			        	window.location.href='/cer_result.html?queryInfo='+data.data[0].IDCard;
 			        }else{
+			        	
 			        	$('.result_empty').show();
 			        };
 			    },
