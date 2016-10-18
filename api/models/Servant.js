@@ -26,7 +26,7 @@ module.exports = {
     },
 
     birthday: {
-      type:'date'
+      type:'string'
     },
 
     certificateID: {
